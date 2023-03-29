@@ -16,7 +16,7 @@ export class RealEnvironment implements Environment {
 
   async fileExists(path: string): Promise<boolean> {
     try {
-      const result = await Deno.stat(path);
+      const result = await Deno.lstat(path);
       return result.isFile;
     } catch (err) {
       if (err instanceof Deno.errors.PermissionDenied) {
@@ -28,7 +28,7 @@ export class RealEnvironment implements Environment {
 
   fileExistsSync(path: string): boolean {
     try {
-      const result = Deno.statSync(path);
+      const result = Deno.lstatSync(path);
       return result.isFile;
     } catch (err) {
       if (err instanceof Deno.errors.PermissionDenied) {
